@@ -27,11 +27,11 @@ export class CoursesService {
   }
 
   addbatch(name: string, id: number) {
-    return this.http.post<Batch>("http://127.0.0.1:8800/courses/" + id + "/batches?name="+name,httpOptions)
+    return this.http.post<Batch>("http://127.0.0.1:8800/courses/" + id + "/batches?name=" + name, httpOptions)
   }
 
-  viewbatch(id:number){
-    
-    return this.http.get<Batch[]>("http://127.0.0.1:8800/courses/" + id + "/batches",httpOptions)
+  viewbatch(id: number) {
+
+    return this.http.get<Batch[]>("http://127.0.0.1:8800/courses/" + id + "/batches", httpOptions)
   }
 }

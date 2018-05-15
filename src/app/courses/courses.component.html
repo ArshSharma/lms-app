@@ -21,13 +21,13 @@
     </div>
 
     <div style="float: right">
-        <label>Enter Course Id </label>&nbsp;
-        <input type="text" #inp1>
-        <button class="btn-primary" (click)="seeBatch(inp1.value)">See Batches</button>
-      </div>
+      <label>Enter Course Id </label>&nbsp;
+      <input type="text" #inp1>
+      <button class="btn-primary" (click)="seeBatch(inp1.value)">See Batches</button>
+    </div>
 
-      <ul class="list-group">
-          <li class="list-group-item" *ngFor="let items of batchList">{{items.name}}</li>
-        </ul>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let items of batchList">{{items.name}}</li>
+    </ul>
 
   </div>

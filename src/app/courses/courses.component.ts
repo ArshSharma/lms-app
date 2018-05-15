@@ -11,12 +11,12 @@ import { Batch } from '../Models/Batch';
 export class CoursesComponent implements OnInit {
 
   coursesList: Course[]
-  batchList:Batch[]
+  batchList: Batch[]
 
 
   constructor(private courseService: CoursesService) {
     this.coursesList = []
-    this.batchList=[]
+    this.batchList = []
   }
 
   ngOnInit() {
@@ -25,14 +25,14 @@ export class CoursesComponent implements OnInit {
 
   selected(id: number) {
     let name = prompt("Enter the Name Of Batch", "")
-    this.courseService.addbatch(name,id).subscribe(()=>{
+    this.courseService.addbatch(name, id).subscribe(() => {
       alert("done")
     })
   }
 
-  seeBatch(id:number){
+  seeBatch(id: number) {
     this.courseService.viewbatch(id).subscribe((b) => {
-      this.batchList=b
+      this.batchList = b
     })
   }
 

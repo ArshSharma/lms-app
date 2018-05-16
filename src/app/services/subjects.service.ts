@@ -7,18 +7,19 @@ import {Subject} from '../Models/Subject'
   providedIn: 'root'
 })
 export class SubjectsService {
+  url="https://whispering-mountain-30046.herokuapp.com/"
 
   constructor(private http: HttpClient) { 
     
   }
   
   getSubjects(): Observable<Subject[]> {
-    return this.http.get<Subject[]>("http://127.0.0.1:8800/subjects")
+    return this.http.get<Subject[]>(this.url+"subjects")
   }
 
 
   addSubjects(name: string): Observable<Subject> {
-    return this.http.post<Subject>("http://127.0.0.1:8800/subjects?name="+name,name)
+    return this.http.post<Subject>(this.url +"subjects?name="+name,name)
   }
 
 }

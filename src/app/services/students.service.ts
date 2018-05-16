@@ -7,16 +7,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StudentsService {
-
+  url="https://whispering-mountain-30046.herokuapp.com/"
   constructor(private http: HttpClient) {
 
   }
 
   getStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>("http://127.0.0.1:8800/students")
+    return this.http.get<Student[]>(this.url+"students")
   }
 
   addStudents(name: string): Observable<Student> {
-    return this.http.post<Student>("http://127.0.0.1:8800/students?name=" + name, name)
+    return this.http.post<Student>(this.url+"students?name=" + name, name)
+  }
+  viewStudent(id: number) {
+
+    return this.http.get<Student>(this.url+"students/" + id  )
   }
 }

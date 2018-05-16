@@ -1,33 +1,146 @@
 <div class="container">
-  <h3>Courses</h3>
-  <p>Enter Courses</p>
-  <input type="text" #inp>
-  <button class="btn btn-primary -m" (click)="addCourses(inp.value)">Submit</button>
+  <div style="text-align: center">
+    <h3>Courses</h3>
+    <div >
+        <br>
+        <h5 *ngIf="ifAddedCourse">Course Added</h5>
+        <h5 *ngIf="ifAddedBatch">Batch Added</h5>
+        <h5 *ngIf="ifAddedLecture">Lecture Added</h5>
+        <h5 *ngIf="ifAddedStudent">Student Added</h5>
+      </div>
+  </div>
 
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-sm-5"></div>
+    <div class="col-sm-2">
+      <input style="text-align:center" placeholder="Enter new course name" type="text" #inp>
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-sm btn-primary -m" (click)="addCourses(inp.value)">Add Course</button>
+    </div>
+  </div>
+  <br>
+  <hr>
   <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="dropdown">
+          <button class="btn btn-primary btn-sm " (click)="listAllCourses()" type="button">Show All Courses
+          </button>
+          
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div style="float: right">
+          <input  style="text-align: center" placeholder="Enter Course Id" type="text" #inp1>&nbsp;
+          <button class="btn-primary btn btn-sm" (click)="seeBatch(inp1.value)">Search Batches</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <br>
 
+  <!-- <div *ngif="getBatch"></div> -->
 
-    <div class="jumbotron">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" (click)="listAllCourses()" type="button" data-toggle="dropdown">Get All Courses
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li class="list-group-item" *ngFor="let items of coursesList" (click)="selected(items.id)">
+  <div *ngIf="isShowCourses" >
+      <h4 >Courses</h4>
+      <br>
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let items of coursesList" >
+            {{items.name}}
+            <div  style="float: right">
+            <button class="btn btn-primary btn-sm" (click)="selected(items.id)"> Add Batch</button>&nbsp;
+            <button class="btn btn-primary btn-sm" (click)="seeBatch(items.id)">View Batches</button>
+            </div>
+          </li>
+        </ul>
+  </div>
+  <br>
+  
+
+  <div *ngIf="isShowLectures" >
+      <h4 >Lectures</h4>
+      <br>
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let items of lectureList" >
             {{items.name}}
           </li>
         </ul>
-      </div>
-    </div>
-
-    <div style="float: right">
-      <label>Enter Course Id </label>&nbsp;
-      <input type="text" #inp1>
-      <button class="btn-primary" (click)="seeBatch(inp1.value)">See Batches</button>
-    </div>
-
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let items of batchList">{{items.name}}</li>
-    </ul>
-
   </div>
+
+  <div *ngIf="isShowStudents" >
+      <h4 >Students</h4>
+      <br>
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let items of studentList" >
+            {{items.name}}
+          </li>
+        </ul>
+  </div>
+
+  <div *ngIf="isShowBatches" >
+    <h4 >Batches</h4>
+    <br>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let items of batchList">{{items.name}}
+          <div  style="float: right">
+              <button class="btn btn-primary btn-sm" (click)="addLecture(items.id)"> Add Lecture</button>&nbsp;
+              <button class="btn btn-primary btn-sm" (click)="addStudent(items.id)">Add Student</button>&nbsp;
+              <button class="btn btn-primary btn-sm" (click)="seeLecture(items.id)"> View Lecture</button>&nbsp;
+              <button class="btn btn-primary btn-sm" (click)="seeStudent(items.id)">View Student</button>
+
+              </div>
+      
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="getBatchDiv">
+    <h4 style="text-align: center">Enter name of the batch to add to the selected course</h4>
+    <br>
+      <div class="row">
+          <div class="col-sm-5"></div>
+          <div class="col-sm-2">
+            <input style="text-align:center" placeholder="Enter batch name " type="text" #inp2>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-sm btn-primary -m" (click)="addBatchTo(inp2.value)">Add Batch to the course</button>
+          </div>
+        </div>
+  </div>
+
+  <div *ngIf="getLectureDiv">
+      <h4 style="text-align: center">Enter name of the Lecture </h4>
+      <br>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2">
+              <input style="text-align:center" placeholder="Enter Lecture name " type="text" #inp3>
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-sm btn-primary -m" (click)="addLectureTo(inp3.value)">Add Lecture to the batch</button>
+            </div>
+          </div>
+    </div>
+
+    <div *ngIf="getStudentDiv">
+        <h4 style="text-align: center">Enter name of the Student </h4>
+        <br>
+          <div class="row">
+              <div class="col-sm-5"></div>
+              <div class="col-sm-2">
+                <input style="text-align:center" placeholder="Enter Student name " type="text" #inp4>
+              </div>
+              <div class="col-sm-2">
+                <button class="btn btn-sm btn-primary -m" (click)="addStudentTo(inp4.value)">Add Student to the batch</button>
+              </div>
+            </div>
+      </div>
+  
+
+  

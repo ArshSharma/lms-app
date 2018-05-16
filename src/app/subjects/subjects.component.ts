@@ -8,8 +8,9 @@ import { SubjectsService } from '../services/subjects.service';
   styleUrls: ['./subjects.component.css']
 })
 export class SubjectsComponent implements OnInit {
-
+  isShowSubjects=false
   subjectList:Subject[]
+  ifAddedSubject=false
 
   constructor(private subjectService:SubjectsService) { }
 
@@ -20,13 +21,16 @@ export class SubjectsComponent implements OnInit {
     this.subjectService.getSubjects().subscribe((subjects) => {
       console.log(subjects)
       this.subjectList = subjects
+      this.isShowSubjects=true
+      this.ifAddedSubject=false
     })
   }
 
 
   addSubjects(name:string){
     this.subjectService.addSubjects(name).subscribe((b)=>{  
-      alert("Added")
+      this.ifAddedSubject=true
+      this.isShowSubjects=false
     })  
   }
 

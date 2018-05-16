@@ -1,12 +1,49 @@
-
-<div class="container">
-    <button class="btn btn-success" (click)="listAllTeachers()">Get All Teachers</button> 
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let items of teachersList">
-        {{items.name}}
-      </li>
-    </ul>
+ 
+  <div class="container">
+      <div style="text-align: center">
+        <h3>Teachers</h3>
+        <div *ngIf="ifAddedTeacher">
+          <br>
+          <h5>Teacher Added</h5>
+        </div>
+      </div>
+    
+      
+      <br>
+      
+      <hr>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+              <button class="btn btn-primary btn-sm" (click)="listAllTeachers()" type="button">Show All Teachers
+              </button>  
+            
+          </div>
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <div style="float: right">
+              <input  style="text-align: center" placeholder="Enter Teacher name" type="text" #inp>&nbsp;
+              <button class="btn-primary btn btn-sm" (click)="addTeacher(inp.value)">Add teacher</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <br>
+    
   
-  
-  
-  </div>
+    
+      <div *ngIf="isShowTeachers" style="text-align: center">
+          <h4 >Teachers</h4>
+          <br>
+          <ul class="list-group">
+              <li class="list-group-item" *ngFor="let items of teachersList">
+                {{items.name}}
+              </li>
+            </ul>
+      </div>
+      <br>
+      

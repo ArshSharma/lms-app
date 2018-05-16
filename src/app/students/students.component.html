@@ -1,19 +1,71 @@
 
+
+
+
 <div class="container">
-    <h3>Students</h3>
-  <p>Enter Students</p>
-  <input type="text" #inp >
-  <button class="btn btn-primary"  (click)="addStudents(inp.value);inp.value=''">Submit</button>
-
-  <div>
-      <button class="btn btn-success" (click)="listAllStudents()">Get All Students</button>
-    
-      
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let items of studentList">
-          {{items.name}}
-        </li>
-      </ul>
+    <div style="text-align: center">
+      <h3>Students</h3>
+      <div *ngIf="ifAddedStudent">
+        <br>
+        <h5>Student Added</h5>
+      </div>
     </div>
-</div>
+  
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2">
+            <input  style="text-align: center" placeholder="Enter Student name" type="text" #inp>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn-primary btn btn-sm" (click)="addStudents(inp.value)">Add Student</button>
+        </div>
+      </div>
+    <hr>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+            <button class="btn btn-primary btn-sm" (click)="listAllStudents()" type="button">Show All Students
+            </button>  
+          
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <div style="float: right">
+              <input  style="text-align: center" placeholder="Enter Student Id" type="text" #inp1>&nbsp;
+              <button class="btn-primary btn btn-sm" (click)="seeStudent(inp1.value)">Search Student</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+  
 
+  
+    <div *ngIf="isShowStudents" style="text-align: center">
+        <h4 >Students</h4>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let items of studentList">
+              {{items.name}}
+            </li>
+          </ul>
+    </div>
+    <br>
+
+    <div *ngIf="isShowSingleStudent" style="text-align: center">
+        <h4 >Student</h4>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let items of student">
+              {{items.name}}
+            </li>
+          </ul>
+    </div>
+    <br>
+    

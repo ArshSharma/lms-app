@@ -1,19 +1,49 @@
 
-
-<div  class="container">
-    <h3>Subjects</h3>
-  <p>Enter subjects</p>
-  <input type="text" #inp>
-  <button class="btn btn-primary" (click)="addSubjects(inp.value)">Submit</button>
-
-    <button class="btn btn-success" (click)="listAllSubjects()">Get All Students</button>
+  <div class="container">
+      <div style="text-align: center">
+        <h3>Batches</h3>
+        <div *ngIf="ifAddedSubject">
+          <br>
+          <h5>Subject Added</h5>
+        </div>
+      </div>
     
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let items of subjectList">
-        {{items.name}}
-      </li>
-    </ul>
+      
+      <br>
+      
+      <hr>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+              <button class="btn btn-primary btn-sm" (click)="listAllSubjects()" type="button">Show All Subjects
+              </button>  
+            
+          </div>
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <div style="float: right">
+              <input  style="text-align: center" placeholder="Enter Subject name" type="text" #inp>&nbsp;
+              <button class="btn-primary btn btn-sm" (click)="addSubjects(inp.value)">Add Subject</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <br>
+    
   
-  
-  
-  </div>
+    
+      <div *ngIf="isShowSubjects" style="text-align: center">
+          <h4 >Subjects</h4>
+          <br>
+          <ul class="list-group">
+              <li class="list-group-item" *ngFor="let items of subjectList">
+                {{items.name}}
+              </li>
+            </ul>
+      </div>
+      <br>
+      

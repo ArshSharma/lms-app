@@ -7,12 +7,15 @@ import { Teacher } from '../Models/Teacher';
   providedIn: 'root'
 })
 export class TeachersService {
-
+  url="https://whispering-mountain-30046.herokuapp.com/"
   constructor(private http: HttpClient) {
 
   }
 
   getTeachers(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>("http://127.0.0.1:8800/teachers")
+    return this.http.get<Teacher[]>(this.url+"teachers")
+  }
+  addTeachers(name: string): Observable<Teacher> {
+    return this.http.post<Teacher>(this.url+"teachers?name="+name,name)
   }
 }

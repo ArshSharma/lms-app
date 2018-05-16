@@ -8,7 +8,8 @@ import { TeachersService } from '../services/teachers.service';
   styleUrls: ['./teachers.component.css']
 })
 export class TeachersComponent implements OnInit {
-
+  isShowTeachers=false
+  ifAddedTeacher=false
   teachersList:Teacher[]
 
   constructor(private teacherService:TeachersService) { }
@@ -19,7 +20,16 @@ export class TeachersComponent implements OnInit {
   listAllTeachers(){
     this.teacherService.getTeachers().subscribe((teachers)=>{
       this.teachersList=teachers
+      this.isShowTeachers=true
+      this.ifAddedTeacher=false
     })
+  }
+
+  addTeacher(name:string){
+    this.teacherService.addTeachers(name).subscribe((b)=>{  
+      this.ifAddedTeacher=true
+      this.isShowTeachers=false
+    })  
   }
 
 }
